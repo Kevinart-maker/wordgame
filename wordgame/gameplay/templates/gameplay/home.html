@@ -1,0 +1,177 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordgame</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lusitana:wght@400;700&family=Montserrat:wght@100;300;400;500;600;700&family=Raleway&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&family=Space+Mono&display=swap');
+        * { transition: 0.3s ease all; }
+        body { font-family: "Montserrat", serif; }
+    </style>
+    <style>
+        h1 { font-size: 2rem; }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            align-items: center;
+        }
+        nav a {
+            text-decoration: none;
+            color: #2bb2e7;
+        }
+        nav .links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .home {
+            overflow: hidden;
+            height: 80vh;
+            position: relative;
+        }
+        .home img {
+            max-width: 100%;
+        }
+        .home .short-info {
+            position: absolute;
+            top: 70%;
+            left: 3%;
+        }
+        .home .short-info h2 {
+            font-size: 2rem;
+            font-family: "Space Mono", serif;
+        }
+        .home .short-info a {
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #000000;
+            padding: 0.5rem;
+            font-weight: 700;
+        }
+        .home .short-info a:hover {
+            color: #000000;
+            background-color: #ffffff;
+        }
+        .game-info {
+            padding: 2rem;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .game-info h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        .game-info p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #333;
+        }
+        .game-features {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .feature-box {
+            text-align: center;
+            width: 30%;
+        }
+        .feature {
+            overflow: hidden;
+            height: 15rem;
+        }
+        .feature img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        .feature h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }footer {
+            background-color: #333;
+            color: #f4f4f4;
+            padding: 1.5rem 0;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        footer .footer-links a {
+            color: #2bb2e7;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+        footer .footer-links a:hover {
+            color: #ffffff;
+        }
+        footer p {
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <h1>WORDGAME</h1>
+        <div class="links">
+            {% if user.is_authenticated %}
+                <span>Welcome, {{ user.username }}</span>
+                <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'register' %}">Register</a>
+                <a href="{% url 'login' %}">Login</a>
+            {% endif %}
+        </div>
+    </nav>
+    
+    <div class="home">
+        <img src="{% static 'images/home1.jpg' %}" alt="">
+        <div class="short-info">
+            <h2>Welcome to the word game</h2>
+            <a href="{% url 'play_game' %}">Start playing</a>
+        </div>
+    </div>
+
+    <section class="game-info">
+        <h2>About the Game</h2>
+        <p>Embark on a journey to test your vocabulary skills! The Wordgame challenges you to find hidden words within a grid of letters. 
+        Choose from various difficulty levels and grid sizes to keep your brain engaged and sharpen your language skills. Compete with friends, 
+        set high scores, and unlock achievements as you progress through different levels.</p>
+        
+        <div class="game-features">
+            <div class="feature-box">
+                <div class="feature">
+                <img src="{% static 'images/feature1.jpg' %}" alt="Puzzle Image">
+                </div>
+                <h3>Engaging Puzzles</h3>
+                <p>Discover a new set of word puzzles each time you play, keeping the game fresh and challenging.</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature">
+                <img src="{% static 'images/feature2.jpg' %}" alt="Levels Image">
+                </div>
+                <h3>Multiple Levels</h3>
+                <p>Advance through various levels of difficulty as you sharpen your word-finding skills.</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature">
+                <img src="{% static 'images/feature3.jpg' %}" alt="Achievements Image">
+                </div>
+                <h3>Achievements</h3>
+                <p>Unlock achievements as you set high scores and complete difficult levels.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="{% url 'home' %}">Game</a>
+            <a href="{% url 'contact' %}">Contact Us</a>
+        </div>
+        <p>&copy; {{ current_year }} Wordgame. All rights reserved.</p>
+    </footer>
+</body>
+</html>

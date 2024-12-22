@@ -1,0 +1,58 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Lusitana:wght@400;700&family=Montserrat:wght@100;300;400;500;600;700&family=Raleway&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Space+Mono&display=swap');
+    body{
+        font-family: "Montserrat", serif;
+    }
+    *{
+            transition: 0.3s ease all;
+    }
+    .reg{
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+    }
+    .reg-form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        background-color: #2bb2e7;
+        color: #fff;
+        padding: 1rem;
+    }
+    form input{
+        width: 100%;
+        padding: 0.3rem;
+        outline: none;
+        border: none;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        font-family: "Montserrat", serif;
+    }
+    form button{
+        display: flex;
+        align-self: center;
+        justify-self: center;
+        padding: 0.5rem;
+        border: none;
+        font-family: "Montserrat", serif;
+        background-color: #fff;
+        color: #000000;
+    }
+    form button:hover{
+        background-color: #000000;
+        color: #ffffff;
+    }
+</style>
+<div class="reg">
+    <h2>Register</h2>
+    <div class="reg-form">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Register</button>
+        </form>
+        <a href="{% url 'login' %}">Already have an account? Login here</a>
+    </div>
+</div>

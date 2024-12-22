@@ -1,0 +1,201 @@
+<script src="https://kit.fontawesome.com/f17774750a.js" crossorigin="anonymous"></script>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Lusitana:wght@400;700&family=Montserrat:wght@100;300;400;500;600;700&family=Raleway&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Space+Mono&display=swap');
+    body{
+        font-family: "Montserrat", serif;
+    }
+
+    input{
+        border: none;
+        outline: none;
+        font-family: "Montserrat", serif;
+    }
+    
+    .contact{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+}
+
+.contact-head{
+    text-align: center;
+}
+.contact-head h1{
+    font-size: 2rem;
+}
+
+.contact-body{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-body .contact-left a{
+    color: #fff;
+}
+.contact-body .contact-left{
+    background-color: #2bb2e7;
+    color: #fff;
+    padding: 2rem;
+    border-radius: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 30rem;
+    width: 25rem;
+}
+
+.contact-body .contact-left h2{
+    font-size: 1.5rem;
+}
+.contact-body .contact-left .contact-add{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    list-style: none;
+}
+.contact-body .contact-left .contact-add li{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.contact-body .contact-left .socials{
+    display: flex;
+    gap: 1rem;
+}
+
+.contact-body .contact-left .socials a i{
+    padding: 0.5rem;
+    background-color: #1d7a9e;
+    border-radius: 100%;
+    font-size: 1rem;
+}
+
+.contact-body .contact-left .socials a i:hover{
+    background-color: #f16e22;
+}
+.contact-body .contact-right form{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.contact-body .contact-right form .contact-in{
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 2rem;
+}
+.contact-body .contact-right form .contact-in input{
+    padding: 1rem;
+    border-bottom: 1px solid #2bb2e7;
+}
+
+.contact-body .contact-right form textarea{
+    padding: 1rem;
+    resize: none;
+    border: none;
+    border-bottom: 1px solid #2bb2e7;
+}
+
+.contact-body .contact-right form button{
+    width: fit-content;
+    padding: 1rem;
+    border-radius: 0.8rem;
+    border: none;
+    background-color: #2bb2e7;
+    color: #fff;
+    display: flex;
+    align-self: flex-end;
+}
+
+@media (max-width: 700px) {
+    .contact-body .contact-right form .contact-in{
+        grid-template-columns: auto;
+    }
+}
+</style>
+
+<div class="contact">
+    <div class="contact-head">
+        <h1>Contact Us</h1>
+        <p>Any question or remarks? Just write us a message!</p>
+    </div>
+    <div class="contact-body">
+        <div class="contact-left">
+            <h2>Contact Information</h2>
+            <div class="contact-add">
+                <li>
+                    <i class="fa-solid fa-phone"></i>
+                    <span>+2348139601733</span>
+                </li>
+                <li>
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>kevinodeyemi76@gmail.com</span>
+                </li>
+                <li>
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>
+                        103, Allen Avenue, Ikeja, Lagos.
+                    </span>
+                </li>
+            </div>
+            <div class="socials">
+                <a href=""><i class="fa-brands fa-facebook"></i></a>
+                
+                <a href=""><i class="fa-brands fa-instagram"></i></a>
+
+                <a href=""><i class="fa-brands fa-twitter"></i></a>
+
+                <a href=""><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+        </div>
+
+
+        <div class="contact-right">
+            <form 
+                action="https://formspree.io/f/xjkvgpba"
+                method="POST"
+            >
+                
+                <div class="contact-in">
+                    <input
+                        id="firstname"
+                        type='text' 
+                        name="firstname"
+                        placeholder='First Name'
+                    />
+                    <input
+                        id="lastname"
+                        type="text" 
+                        name="lastname"
+                        placeholder='Last Name'
+                    />
+                    <input
+                        id="email"
+                        type="email" 
+                        name="email"
+                        placeholder='Email'
+                    />
+                    <input
+                        id="phone"
+                        type="number" 
+                        name="phone"
+                        placeholder='Phone Number'
+                    />
+                </div>
+                <textarea
+                    id="message"
+                    name="message"
+                    placeholder='Write your message'
+                ></textarea>
+                <button type="submit">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

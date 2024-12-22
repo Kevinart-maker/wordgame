@@ -1,0 +1,158 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Game</title>
+    <script src="https://kit.fontawesome.com/f17774750a.js" crossorigin="anonymous"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lusitana:wght@400;700&family=Montserrat:wght@100;300;400;500;600;700&family=Raleway&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Space+Mono&display=swap');
+        *{
+            transition: 0.3s ease all;
+        }
+        body{
+            font-family: "Montserrat", serif;
+        }
+        nav{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem;
+        }
+        nav h1 a{
+            color: #2bb2e7;
+            font-size: 2rem;
+            text-decoration: none;
+        }
+        nav img{
+            max-width: 3rem;
+        }
+        nav .user{
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        i.hint-bulb{
+            color: rgb(233, 112, 13);
+        }
+        .game-content{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .game-content .game-container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            width: 50rem;
+            background-color: #2bb2e7;
+            border: none;
+            color: #fff;
+            padding: 1.2rem;
+        }
+        form{
+            font-family: "Montserrat", serif;
+            text-align: center;
+        }
+        .game-form input, button{
+            font-family: "Montserrat", serif;
+            padding: 0.6rem;
+            border: none;
+            outline: none;
+            color: #000000;
+            font-size: 0.7rem;
+        }
+        button:hover{
+            background-color: #000000;
+            color: #fff;
+        }
+        .diff-box{
+            font-family: "Montserrat", serif;
+            padding: 0.4rem;
+            border: none;
+            outline: none;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+            gap: 5px;
+            margin: 20px auto;
+            max-width: 400px; /* You can adjust this width */
+        }
+        .grid-item {
+            background-color: #fff;
+            color: #000000;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 15px;
+            font-size: 1.5em; /* Adjust font size as needed */
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        .grid-item:hover {
+            background-color: #e0e0e0; /* Change background on hover */
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <h1><a href="{%url 'home' %}">WORDGAME</a></h1>
+        <p>Current Level: {{ user.current_level }}</p>
+        <p>Score: {{ score }}</p>
+        <p>Achievements: </p>
+    
+        <div class="user">
+            <h2>{{ user.username }}!</h2>
+            {% if user.profile_image %}
+                <img src="{{ user.profile_image.url }}" alt="Profile Picture" />
+            {% else %}
+                <img src="{% static 'images/default-profile.jpg' %}" alt="Default Profile Picture" />
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="game-content">
+        <div class="game-container">
+            <form method="GET" action="{% url 'play_game' %}">
+                <h2>Guess the word</h2>
+                <label for="difficulty">Difficulty level - </label>
+                <select name="difficulty" id="difficulty" class="diff-box">
+                    <option value="1" {% if difficulty == '1' %}selected{% endif %}>Easy</option>
+                    <option value="2" {% if difficulty == '2' %}selected{% endif %}>Medium</option>
+                    <option value="3" {% if difficulty == '3' %}selected{% endif %}>Hard</option>
+                </select>
+                <button type="submit">Update</button>
+            </form>
+
+            <div class="grid">
+                {% for row in grid %}
+                    {% for letter in row %}
+                        <div class="grid-item">{{ letter }}</div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+            
+            {% if random_word %}
+                <form method="POST" class="game-form">
+                    {% csrf_token %}
+                    <input type="text" name="user_guess" placeholder="Your guess" required>
+                    <button type="submit">Submit Guess</button>
+                </form>
+                <p class="hint">Hint <i class="fa-solid fa-lightbulb hint-bulb"></i> - <strong>{{ random_word.definition }}</strong></p>
+            
+                {% if result %}
+                    <p>{{ result }}</p>
+                {% endif %}
+            {% else %}
+                <p>Please select a difficulty level to start the game.</p>
+            {% endif %}
+        </div>
+    </div>
+    
+
+</body>
+</html>

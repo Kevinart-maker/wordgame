@@ -1,0 +1,42 @@
+<!-- templates/gameplay/leaderboard.html -->
+ <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lusitana:wght@400;700&family=Montserrat:wght@100;300;400;500;600;700&family=Raleway&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Space+Mono&display=swap');
+    body{
+        font-family: "Montserrat", serif;
+    }
+
+    .leader{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+    }
+    table{
+        background-color: #2bb2e7;
+        padding: 1rem;
+        color: #fff;
+    }
+ </style>
+ 
+ <div class="leader">
+    <h1>Leaderboard</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Score</th>
+                <th>Date Achieved</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in leaderboard_entries %}
+            <tr>
+                <td>{{ entry.user.username }}</td>
+                <td>{{ entry.score }}</td>
+                <td>{{ entry.date_achieved }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+ </div>

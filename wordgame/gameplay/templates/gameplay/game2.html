@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+            gap: 5px;
+            margin: 20px auto;
+            max-width: 400px; /* You can adjust this width */
+        }
+        .grid-item {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 15px;
+            font-size: 1.5em; /* Adjust font size as needed */
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        .grid-item:hover {
+            background-color: #e0e0e0; /* Change background on hover */
+        }
+        .result {
+            margin: 20px 0;
+            font-size: 1.2em;
+            color: #555;
+        }
+        .score {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        .difficulty {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Word Game</h1>
+    
+    <form method="GET" action="{% url 'play_game' %}" class="difficulty">
+        <label for="difficulty">Select Difficulty: </label>
+        <select name="difficulty" id="difficulty" class="diff-box">
+            <option value="1" {% if difficulty == 1 %}selected{% endif %}>Easy</option>
+            <option value="2" {% if difficulty == 2 %}selected{% endif %}>Medium</option>
+            <option value="3" {% if difficulty == 3 %}selected{% endif %}>Hard</option>
+        </select>
+        <button type="submit">Update</button>
+    </form>
+
+    <div class="grid">
+        {% for row in grid %}
+            {% for letter in row %}
+                <div class="grid-item">{{ letter }}</div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+
+    <div class="result">{{ result }}</div>
+    <div class="score">Score: {{ score }}</div>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="user_guess" placeholder="Your guess" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <a href="{% url 'home' %}">Back to Home</a>
+
+</body>
+</html>
